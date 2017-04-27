@@ -12,6 +12,9 @@ export class TranslateHttpLoader implements TranslateLoader {
      */
     public getTranslation(lang: string): any {
         return this.http.get(`${this.prefix}${lang}${this.suffix}`)
-            .map((res: Response) => res.json());
+            .map((res: Response) => {
+                let response = res.json();
+                return response[lang];
+            });
     }
 }
